@@ -1,14 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
-./frontend/node_modules
-./backend/node_modules
-
-logs
-*.log
+node_modules
 
 # testing
 /coverage
@@ -27,6 +18,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# media files
+media/uploads/*
+!media/uploads/.gitkeep
 
-.frontend/node_modules
-.backend/node_modules
+media/uploads/video_thumbnails/*
+!media/uploads/video_thumbnails/.gitkeep

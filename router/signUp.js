@@ -22,7 +22,7 @@ router.post('/signUp', async (req,res)=>{
     .exec()
     .then(user => {
         if (user.length >=1 ) {
-            return res.statusCode(409).json({   // conflict! mail id already exists
+            return res.status(409).json({   // conflict! mail id already exists
                 message:"User already exists"
             });   
         }else{        // generate new user
@@ -52,7 +52,7 @@ router.post('/signUp', async (req,res)=>{
                         .catch(err => {
                             console.log(err);
                             res.status(500).json({
-                                erro: err
+                                error: err
                             });
                         });
                     }

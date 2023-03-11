@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
+const User = require('../models/User');
 
 router.post('/', (req,res) => {
     User.find({email: req.body.email})
@@ -22,21 +23,33 @@ router.post('/', (req,res) => {
                 });
             }
             // if password mathce s we will generate token ( for session)
-            if(result){
-                return res.status(200).json({
-                    message: 'Authorization Successful'
+            if (result) {
+                const token = jwt.sign({
+                  userId: user[0]._id,
+                  firstName: user[0].firstName,
+                  lastName: user[0].lastName,
+                  email: user[0].email,
+                }, 
+                'my_secret_key',
+                {
+                  expiresIn: "1h"
                 });
-            }
-            res.status(401).json({
-                message: 'Authorization Failed'
+                return res.status(200).json({
+                  message: 'Auth successful',
+                  token: token
+                });
+              }
+              res.status(401).json({
+                message: 'Auth failed'
+              });
             });
-        });
-    })
-    .catch(err => {
-        res.status(500).json({
-            error:err
-        });
-    });
-});
-
-module.exports =router;
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json({
+              error: err
+            });
+          });
+      });
+      
+      module.exports = router;

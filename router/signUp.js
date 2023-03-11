@@ -4,10 +4,10 @@ const mongoose=require('mongoose');
 const bcrypt=require('bcrypt');
 const User = require('../models/User');
 
-console.log('bye');
+// console.log('bye');
 
 router.post('/signUp', async (req,res)=>{
-    console.log("hi");
+    // console.log("hi");
     console.log(req.body);
 
     // try{

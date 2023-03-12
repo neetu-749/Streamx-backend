@@ -22,6 +22,7 @@ const upload = multer({
 });
 
 router.post('/', upload.single('file'), (req, res, next) => {
+  console.log("Upload");
   thumbnailGenerator.generateThumbnail(
     'http://127.0.0.1:' + port + '/api/videos/' + req.file.filename.replace(/ /g, '_'), 
     req.file.filename.replace(/ /g, '_'),

@@ -4,6 +4,7 @@ const router = express.Router();
 const VideoDetails = require('../models/VideoDetailsSchema');
 
 router.get('/', (req, res, next) => {
+  // console.log("yess");
   VideoDetails
     .find()
     .exec()
